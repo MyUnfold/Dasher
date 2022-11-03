@@ -1,19 +1,59 @@
+buildscript {
+    ext {
+        springBootVersion = '2.4.5'
+    }
+
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
 plugins {
+    id 'org.springframework.boot' version '2.4.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
-group 'com.app.dasher'
-version '1.0-SNAPSHOT'
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
 
-test {
-    useJUnitPlatform()
+group = 'com.app'
+version = '0.0.1-SNAPSHOT'
+description = 'dasher'
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation ('org.springframework.boot:spring-boot-starter-actuator')
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.9'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.1'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.6.6'
+
+    implementation('org.springframework.boot:spring-boot-starter-data-mongodb-reactive:2.7.0')
+    implementation('org.springframework.boot:spring-boot-starter-websocket')
+    implementation('org.springframework.boot:spring-boot-starter-webflux')
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
+    implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.2'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-test'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation group: 'com.stripe', name: 'stripe-java', version: '20.41.0'
+
+    implementation group: 'dev.morphia.morphia', name: 'core', version: '1.6.1'
+
+    implementation 'com.google.firebase:firebase-admin:8.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'se.eris:notnull-instrumenter-maven-plugin:1.1.1'
+
+    compileOnly('org.projectlombok:lombok')
 }

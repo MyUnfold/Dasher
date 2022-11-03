@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: staging
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+jwt:
+  secret: saltandpepper
+
+---
+spring:
+  profiles: staging
+  data.mongodb:
+    host: 35.184.198.142
+    port: 8086
+    database: dash
+---
+server:
+  port: 8080
