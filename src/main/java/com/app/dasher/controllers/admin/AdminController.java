@@ -2,7 +2,9 @@ package com.app.dasher.controllers.admin;
 
 import com.app.dasher.models.ResponseDto;
 import com.app.dasher.models.admin.AdminProperties;
-import com.app.dasher.models.admin.PROPERTY_TYPE;
+import com.app.dasher.models.admin.PropertyType;
+import com.app.dasher.models.coupon.Coupon;
+import com.app.dasher.models.mood.Moods;
 import com.app.dasher.services.AdminService;
 import com.app.dasher.utils.Constant;
 import java.util.List;
@@ -45,8 +47,30 @@ public class AdminController {
                 String.class), HttpStatus.BAD_REQUEST)));
   }
 
+  @PostMapping("/mood/create")
+  public Mono<ResponseEntity<ResponseDto<Object>>> createMood(@RequestBody List<Moods> moodsList) {
+    return Mono
+        .just(adminService.createMood(moodsList))
+        .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
+        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
+        .onErrorResume(
+            throwable -> Mono.just(new ResponseEntity<>(ResponseDto.fail(throwable.getMessage(),
+                String.class), HttpStatus.BAD_REQUEST)));
+  }
+
+  @PostMapping("/coupon/create")
+  public Mono<ResponseEntity<ResponseDto<Object>>> createCoupon(@RequestBody List<Coupon> couponList) {
+    return Mono
+        .just(adminService.createCoupon(couponList))
+        .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
+        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
+        .onErrorResume(
+            throwable -> Mono.just(new ResponseEntity<>(ResponseDto.fail(throwable.getMessage(),
+                String.class), HttpStatus.BAD_REQUEST)));
+  }
+
   @GetMapping("/property/create/{type}")
-  public Mono<ResponseEntity<ResponseDto<Object>>> getPropertyBasedUponFilter(@PathVariable PROPERTY_TYPE type, @RequestParam(value = "search", required = false) String keyword) {
+  public Mono<ResponseEntity<ResponseDto<Object>>> getPropertyBasedUponFilter(@PathVariable PropertyType type, @RequestParam(value = "search", required = false) String keyword) {
     return Mono
         .just(adminService.getPropertyBasedUponFilter(type, keyword))
         .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))

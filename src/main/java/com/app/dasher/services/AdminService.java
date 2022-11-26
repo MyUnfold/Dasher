@@ -1,7 +1,9 @@
 package com.app.dasher.services;
 
 import com.app.dasher.models.admin.AdminProperties;
-import com.app.dasher.models.admin.PROPERTY_TYPE;
+import com.app.dasher.models.admin.PropertyType;
+import com.app.dasher.models.coupon.Coupon;
+import com.app.dasher.models.mood.Moods;
 import java.util.List;
 
 /**
@@ -13,6 +15,10 @@ import java.util.List;
 public interface AdminService {
 
   Object createProperty(List<AdminProperties> adminPropertiesList);
-  Object getPropertyBasedUponFilter(PROPERTY_TYPE property_type, String keyword);
+  Object createMood(List<Moods> moodsList);
+  Object createCoupon(List<Coupon> couponList);
+  Object getPropertyBasedUponFilter(PropertyType propertyType, String keyword);
+  Object listOfMoods();
+  Object listOfCoupon();
 
 }

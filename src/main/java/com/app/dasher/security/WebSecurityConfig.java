@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -28,18 +29,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-//        http.cors().and()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//                .authorizeRequests()
-//                .antMatchers("/v1/user/register").permitAll()
-//                .antMatchers("/v1/stripe/**").permitAll()
-//                .antMatchers("/ws/**").permitAll()
-//                .antMatchers("/v1/storage/**").permitAll()
-//                .antMatchers("/v1/admin/**").permitAll()
-//                .antMatchers("/v1/log/**").permitAll()
-//                .antMatchers("/v1/game/**").permitAll()
-//                .antMatchers("/v1/team/**").permitAll()
-//                .anyRequest().authenticated();
+        http.cors().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers("/v1/user/register").permitAll()
+                .anyRequest().authenticated();
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
     }
 

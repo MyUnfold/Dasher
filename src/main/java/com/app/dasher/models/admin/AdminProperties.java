@@ -25,7 +25,7 @@ public class AdminProperties extends BaseModel {
   private String id;
   private String name;
   private String imageUrl;
-  private PROPERTY_TYPE property_type;
+  private PropertyType propertyType;
 
   public ObjectId getObjectId() {
     return objectId;
@@ -59,11 +59,11 @@ public class AdminProperties extends BaseModel {
     this.imageUrl = imageUrl;
   }
 
-  public PROPERTY_TYPE getProperty_type() {
-    return property_type;
+  public PropertyType getProperty_type() {
+    return propertyType;
   }
 
-  public void setProperty_type(PROPERTY_TYPE property_type) {
-    this.property_type = property_type;
+  public void setProperty_type(PropertyType propertyType) {
+    this.propertyType = propertyType;
   }
 }

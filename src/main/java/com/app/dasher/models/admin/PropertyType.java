@@ -6,6 +6,6 @@ package com.app.dasher.models.admin;
  * @date 03/11/22 4:36 am
  * @company NextUp
  */
-public enum PROPERTY_TYPE {
+public enum PropertyType {
   INTEREST, ALLERGY
 }
