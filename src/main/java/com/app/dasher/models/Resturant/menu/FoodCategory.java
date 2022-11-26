@@ -7,5 +7,5 @@ package com.app.dasher.models.Resturant.menu;
  * @company NextUp
  */
 public enum FoodCategory {
-  VEG, NON_VEG
+  VEG, NON_VEG, VEGAN
 }

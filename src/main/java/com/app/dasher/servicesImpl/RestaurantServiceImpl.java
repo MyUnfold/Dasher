@@ -1,13 +1,20 @@
 package com.app.dasher.servicesImpl;
 
+import com.app.dasher.models.Resturant.Ratings;
 import com.app.dasher.models.Resturant.Restaurants;
+import com.app.dasher.models.Resturant.Review.Review;
+import com.app.dasher.models.Resturant.Review.dto.ReviewDto;
 import com.app.dasher.models.Resturant.dto.ListRestaurantConfigDto;
 import com.app.dasher.models.Resturant.menu.MenuItems;
+import com.app.dasher.models.Resturant.menu.dto.MenuListDto;
+import com.app.dasher.models.dashboard.MenuBriefInfoDto;
+import com.app.dasher.models.dashboard.RestaurantDetailFilterDto;
 import com.app.dasher.services.RestaurantService;
 import com.app.dasher.utils.Constant;
 import com.app.dasher.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import org.apache.commons.beanutils.BeanUtils;
@@ -133,4 +140,99 @@ public class RestaurantServiceImpl implements RestaurantService {
     else return "Restaurant not found";
   }
 
+  @Override
+  public MenuListDto getMenuItemsBasedUponFilters(RestaurantDetailFilterDto filterDto) {
+    Restaurants restaurants = (Restaurants) getRestaurantDetails(filterDto.getRestaurantId());
+    List<MenuItems> menuItemsList = restaurants.getMenuItemsList();
+    MenuListDto menuListDto = new MenuListDto();
+
+    List<MenuBriefInfoDto> diningMenuList = new ArrayList<>();
+    List<MenuBriefInfoDto> pickUpMenuList = new ArrayList<>();
+
+    if(null != menuItemsList && menuItemsList.size()>0){
+      for(MenuItems menuItems: menuItemsList){
+          MenuBriefInfoDto menuBriefInfoDto  = new MenuBriefInfoDto();
+          menuBriefInfoDto.setName(menuItems.getName());
+          menuBriefInfoDto.setImageUrl(menuItems.getImageUrl());
+          menuBriefInfoDto.setPrice(menuItems.getPrice());
+          menuBriefInfoDto.setVeg(menuItems.isVeg());
+          menuBriefInfoDto.setReview(ThreadLocalRandom.current().nextDouble(0.0, 10.0));
+          menuBriefInfoDto.setSubList(menuItems.getShortDescription());
+          menuBriefInfoDto.setCustomizable(menuItems.isCustomizable());
+          menuBriefInfoDto.setId(menuItems.getId());
+          diningMenuList.add(menuBriefInfoDto);
+      }
+    }
+
+    pickUpMenuList.addAll(diningMenuList);
+    menuListDto.setDiningMenuList(diningMenuList);
+    menuListDto.setPickUpMenuList(pickUpMenuList);
+    return menuListDto;
+
+  }
+
+  @Override
+  public Object addReviewToRestaurants(String id, ReviewDto review) {
+    Restaurants restaurants = (Restaurants) getRestaurantDetails(id);
+
+    if(review.isDinning()){
+      if(restaurants.getDiningReview() != null) {
+        if (null != restaurants.getDiningReview().getReviewList() && restaurants.getDiningReview().getReviewList().size()>0){
+          List<Review> reviewList = restaurants.getDiningReview().getReviewList();
+          reviewList.add(review);
+          restaurants.getDiningReview().setReviewList(reviewList);
+          mongoOperations.save(restaurants);
+        } else {
+          List<Review> reviewList = new ArrayList<>();
+          reviewList.add(review);
+          restaurants.getDiningReview().setReviewList(reviewList);
+          mongoOperations.save(restaurants);
+        }
+      } else {
+        Ratings ratings = new Ratings();
+        List<Review> reviewList = new ArrayList<>();
+        reviewList.add(review);
+        ratings.setReviewList(reviewList);
+        restaurants.setDiningReview(ratings);
+        mongoOperations.save(restaurants);
+      }
+    } else {
+      if(restaurants.getServiceReview() != null) {
+        if (null != restaurants.getServiceReview().getReviewList() && restaurants.getServiceReview().getReviewList().size()>0){
+          List<Review> reviewList = restaurants.getServiceReview().getReviewList();
+          reviewList.add(review);
+          restaurants.getServiceReview().setReviewList(reviewList);
+          mongoOperations.save(restaurants);
+        } else {
+          List<Review> reviewList = new ArrayList<>();
+          reviewList.add(review);
+          restaurants.getServiceReview().setReviewList(reviewList);
+          mongoOperations.save(restaurants);
+        }
+      } else {
+        Ratings ratings = new Ratings();
+        List<Review> reviewList = new ArrayList<>();
+        reviewList.add(review);
+        ratings.setReviewList(reviewList);
+        restaurants.setServiceReview(ratings);
+        mongoOperations.save(restaurants);
+      }
+    }
+    return "Successfully Added";
+  }
+
+  @Override
+  public Object listReviewForRestaurant(String id, int page, int size) {
+    Restaurants restaurants = (Restaurants) getRestaurantDetails(id);
+    List<Review> reviewList = new ArrayList<>();
+
+    if(null != restaurants.getDiningReview() && null != restaurants.getDiningReview().getReviewList() && restaurants.getDiningReview().getReviewList().size()>0) {
+      reviewList.addAll(restaurants.getDiningReview().getReviewList());
+    }
+
+    if(null != restaurants.getServiceReview() && null != restaurants.getServiceReview().getReviewList() && restaurants.getServiceReview().getReviewList().size()>0) {
+      reviewList.addAll(restaurants.getServiceReview().getReviewList());
+    }
+    return reviewList;
+  }
 }

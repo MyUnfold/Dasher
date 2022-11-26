@@ -10,12 +10,29 @@ import java.util.List;
  */
 public class RestaurantInfoDto {
   private String name;
+  private String id;
   private String imageUrl;
   private boolean isOpen;
   private List<String> cuisine;
+  private int deliveryTime;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public int getDeliveryTime() {
+    return deliveryTime;
+  }
+
+  public void setDeliveryTime(int deliveryTime) {
+    this.deliveryTime = deliveryTime;
+  }
 
   private double ratings;
-  private double deliveryTime;
 
   public double getRatings() {
     return ratings;
@@ -23,14 +40,6 @@ public class RestaurantInfoDto {
 
   public void setRatings(double ratings) {
     this.ratings = ratings;
-  }
-
-  public double getDeliveryTime() {
-    return deliveryTime;
-  }
-
-  public void setDeliveryTime(double deliveryTime) {
-    this.deliveryTime = deliveryTime;
   }
 
   public String getName() {

@@ -31,6 +31,7 @@ public class Restaurants extends BaseModel {
   private String name;
   private String tagLine;
   private List<String> tags;
+  private List<String> imageUrl;
   private Loc location;
   private String logoUrl;
   private Ratings diningReview;
@@ -43,6 +44,14 @@ public class Restaurants extends BaseModel {
   private List<MenuItems> menuItemsList;
 
   private List<String> cuisine;
+
+  public List<String> getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(List<String> imageUrl) {
+    this.imageUrl = imageUrl;
+  }
 
   public List<String> getCuisine() {
     return cuisine;

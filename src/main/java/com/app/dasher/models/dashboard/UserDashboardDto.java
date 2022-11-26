@@ -1,7 +1,5 @@
 package com.app.dasher.models.dashboard;
 
-import com.app.dasher.models.coupon.Coupon;
-import com.app.dasher.models.mood.Moods;
 import com.app.dasher.models.orders.OrderHistory;
 import java.util.List;
 
@@ -13,10 +11,10 @@ import java.util.List;
  */
 public class UserDashboardDto {
   private List<OrderHistory> orders;
-  private List<Moods> moodsList;
+  private List<ListMoods> moodsList;
   private List<RestaurantInfoDto> recommendation;
   private List<RestaurantInfoDto> mustTry;
-  private List<Coupon> couponList;
+  private List<ListCoupons> couponList;
 
   public List<OrderHistory> getOrders() {
     return orders;
@@ -26,13 +24,6 @@ public class UserDashboardDto {
     this.orders = orders;
   }
 
-  public List<Moods> getMoodsList() {
-    return moodsList;
-  }
-
-  public void setMoodsList(List<Moods> moodsList) {
-    this.moodsList = moodsList;
-  }
 
   public List<RestaurantInfoDto> getRecommendation() {
     return recommendation;
@@ -51,11 +42,19 @@ public class UserDashboardDto {
     this.mustTry = mustTry;
   }
 
-  public List<Coupon> getCouponList() {
+  public List<ListMoods> getMoodsList() {
+    return moodsList;
+  }
+
+  public void setMoodsList(List<ListMoods> moodsList) {
+    this.moodsList = moodsList;
+  }
+
+  public List<ListCoupons> getCouponList() {
     return couponList;
   }
 
-  public void setCouponList(List<Coupon> couponList) {
+  public void setCouponList(List<ListCoupons> couponList) {
     this.couponList = couponList;
   }
 }

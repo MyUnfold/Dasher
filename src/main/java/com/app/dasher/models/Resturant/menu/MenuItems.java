@@ -14,6 +14,7 @@ public class MenuItems {
 
   private String id;
   private String name;
+  private List<String> imageUrl;
   private List<String> tags;
   private double price;
   private FoodCategory category;
@@ -27,6 +28,24 @@ public class MenuItems {
   private Review foodReview;
 
   private List<Customization> customizations;
+
+  private boolean isVeg;
+
+  public boolean isVeg() {
+    return isVeg;
+  }
+
+  public void setVeg(boolean veg) {
+    isVeg = veg;
+  }
+
+  public List<String> getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(List<String> imageUrl) {
+    this.imageUrl = imageUrl;
+  }
 
   public String getId() {
     return id;

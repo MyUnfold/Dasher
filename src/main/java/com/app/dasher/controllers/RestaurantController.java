@@ -2,9 +2,9 @@ package com.app.dasher.controllers;
 
 import com.app.dasher.models.ResponseDto;
 import com.app.dasher.models.Resturant.Restaurants;
+import com.app.dasher.models.Resturant.Review.dto.ReviewDto;
 import com.app.dasher.models.Resturant.dto.ListRestaurantConfigDto;
 import com.app.dasher.models.Resturant.menu.MenuItems;
-import com.app.dasher.models.user.OtpRequestDto;
 import com.app.dasher.services.RestaurantService;
 import com.app.dasher.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
@@ -78,10 +79,33 @@ public class RestaurantController {
                 String.class), HttpStatus.BAD_REQUEST)));
   }
 
+  @PostMapping("/add/review/{restaurantId}")
+  public Mono<ResponseEntity<ResponseDto<Object>>> addReview(@PathVariable String restaurantId, @RequestBody ReviewDto reviewDto) {
+    return Mono
+        .just(restaurantService.addReviewToRestaurants(restaurantId, reviewDto))
+        .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
+        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
+        .onErrorResume(
+            throwable -> Mono.just(new ResponseEntity<>(ResponseDto.fail(throwable.getMessage(),
+                String.class), HttpStatus.BAD_REQUEST)));
+  }
+
   @GetMapping("/detail/menu/{id}/{menuId}")
   public Mono<ResponseEntity<ResponseDto<Object>>> getRestaurantMenuCustomizableList(@PathVariable String id, @PathVariable String menuId) {
     return Mono
         .just(restaurantService.getRestaurantMenuCustomizableList(id, menuId))
+        .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
+        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
+        .onErrorResume(
+            throwable -> Mono.just(new ResponseEntity<>(ResponseDto.fail(throwable.getMessage(),
+                String.class), HttpStatus.BAD_REQUEST)));
+  }
+
+  @GetMapping("/list/review/{id}")
+  public Mono<ResponseEntity<ResponseDto<Object>>> listReviewForRestaurant(@PathVariable String id, @RequestParam(value = "page", required = false) int page,
+      @RequestParam(value = "size", required = false) int size) {
+    return Mono
+        .just(restaurantService.listReviewForRestaurant(id, page, size))
         .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
         .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
         .onErrorResume(
