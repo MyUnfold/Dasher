@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalTime;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -38,8 +39,8 @@ public class Restaurants extends BaseModel {
   private Ratings serviceReview;
   private ServiceType serviceType;
   private String customAddress;
-  private Long openingTime;
-  private Long closingTime;
+  private LocalTime openingTime;
+  private LocalTime closingTime;
   private ContactInfo contactInfo;
   private List<MenuItems> menuItemsList;
 
@@ -149,19 +150,19 @@ public class Restaurants extends BaseModel {
     this.customAddress = customAddress;
   }
 
-  public Long getOpeningTime() {
+  public LocalTime getOpeningTime() {
     return openingTime;
   }
 
-  public void setOpeningTime(Long openingTime) {
+  public void setOpeningTime(LocalTime openingTime) {
     this.openingTime = openingTime;
   }
 
-  public Long getClosingTime() {
+  public LocalTime getClosingTime() {
     return closingTime;
   }
 
-  public void setClosingTime(Long closingTime) {
+  public void setClosingTime(LocalTime closingTime) {
     this.closingTime = closingTime;
   }
 

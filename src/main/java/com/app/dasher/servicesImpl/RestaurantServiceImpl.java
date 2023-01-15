@@ -13,6 +13,7 @@ import com.app.dasher.services.RestaurantService;
 import com.app.dasher.utils.Constant;
 import com.app.dasher.utils.Utils;
 import java.util.ArrayList;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
@@ -83,10 +84,12 @@ public class RestaurantServiceImpl implements RestaurantService {
       query.addCriteria(Criteria.where("cuisine").is(listRestaurantConfigDto.getCuisine()));
     }
 
-    if(null != listRestaurantConfigDto.getClosingHours() && null != listRestaurantConfigDto.getOpeningHours()){
+    if(listRestaurantConfigDto.getClosingHours() >0 && listRestaurantConfigDto.getOpeningHours() >0){
+      LocalTime openingHours = LocalTime.of(listRestaurantConfigDto.getOpeningHours(), 0);
+      LocalTime closingHours = LocalTime.of(listRestaurantConfigDto.getClosingHours(), 0);
       query.addCriteria(new Criteria().andOperator(
-          Criteria.where("openingTime").gte(listRestaurantConfigDto.getOpeningHours()),
-          Criteria.where("closingTime").lte(listRestaurantConfigDto.getClosingHours())
+          Criteria.where("openingTime").lte(openingHours),
+          Criteria.where("closingTime").gte(closingHours)
       ));
     }
 

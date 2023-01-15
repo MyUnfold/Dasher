@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/v1/user/register").permitAll()
+                .antMatchers("/v1/user/register/**").permitAll()
                 .anyRequest().authenticated();
         http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
     }

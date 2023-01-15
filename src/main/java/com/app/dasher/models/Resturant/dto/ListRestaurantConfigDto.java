@@ -16,8 +16,8 @@ public class ListRestaurantConfigDto {
   private double distanceInKm;
   private String ratings;
   private ServiceType serviceType;
-  private Long openingHours;
-  private Long closingHours;
+  private int openingHours;
+  private int closingHours;
   private String cuisine;
 
   public String getCuisine() {
@@ -76,19 +76,19 @@ public class ListRestaurantConfigDto {
     this.serviceType = serviceType;
   }
 
-  public Long getOpeningHours() {
+  public int getOpeningHours() {
     return openingHours;
   }
 
-  public void setOpeningHours(Long openingHours) {
+  public void setOpeningHours(int openingHours) {
     this.openingHours = openingHours;
   }
 
-  public Long getClosingHours() {
+  public int getClosingHours() {
     return closingHours;
   }
 
-  public void setClosingHours(Long closingHours) {
+  public void setClosingHours(int closingHours) {
     this.closingHours = closingHours;
   }
 }
