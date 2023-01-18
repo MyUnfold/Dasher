@@ -1,9 +1,9 @@
 package com.app.dasher.services;
 
-import com.app.dasher.models.Resturant.Restaurants;
-import com.app.dasher.models.Resturant.Review.Review;
+import com.app.dasher.models.Resturant.Restaurant;
 import com.app.dasher.models.Resturant.Review.dto.ReviewDto;
 import com.app.dasher.models.Resturant.dto.ListRestaurantConfigDto;
+import com.app.dasher.models.Resturant.dto.RestaurantDto;
 import com.app.dasher.models.Resturant.menu.MenuItems;
 import com.app.dasher.models.Resturant.menu.dto.MenuListDto;
 import com.app.dasher.models.dashboard.RestaurantDetailFilterDto;
@@ -16,7 +16,7 @@ import com.app.dasher.models.dashboard.RestaurantDetailFilterDto;
  */
 
 public interface RestaurantService {
-  Object createRestaurant(Restaurants restaurants);
+  Object createRestaurant(RestaurantDto restaurant);
   Object getRestaurantDetails(String id);
   Object listRestaurantBasedUponConfig(ListRestaurantConfigDto listRestaurantConfigDto);
 

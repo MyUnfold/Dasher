@@ -1,10 +1,11 @@
 package com.app.dasher.servicesImpl;
 
 import com.app.dasher.models.Resturant.Ratings;
-import com.app.dasher.models.Resturant.Restaurants;
+import com.app.dasher.models.Resturant.Restaurant;
 import com.app.dasher.models.Resturant.Review.Review;
 import com.app.dasher.models.Resturant.Review.dto.ReviewDto;
 import com.app.dasher.models.Resturant.dto.ListRestaurantConfigDto;
+import com.app.dasher.models.Resturant.dto.RestaurantDto;
 import com.app.dasher.models.Resturant.menu.MenuItems;
 import com.app.dasher.models.Resturant.menu.dto.MenuListDto;
 import com.app.dasher.models.dashboard.MenuBriefInfoDto;
@@ -12,6 +13,7 @@ import com.app.dasher.models.dashboard.RestaurantDetailFilterDto;
 import com.app.dasher.services.RestaurantService;
 import com.app.dasher.utils.Constant;
 import com.app.dasher.utils.Utils;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.time.LocalTime;
 import java.util.List;
@@ -47,25 +49,27 @@ public class RestaurantServiceImpl implements RestaurantService {
   MongoTemplate mongoTemplate;
 
   @Override
-  public Object createRestaurant(Restaurants restaurantsDto) {
-      Restaurants restaurantsDetails = new Restaurants();
+  public Object createRestaurant(RestaurantDto restaurantDto) {
+      Restaurant restaurantDetails = new Restaurant();
       try {
-        BeanUtils.copyProperties(restaurantsDetails, restaurantsDto);
+        BeanUtils.copyProperties(restaurantDetails, restaurantDto);
       } catch (Exception e) {
         e.printStackTrace();
       }
-
-    restaurantsDetails.setId(Utils.generateId());
-    restaurantsDetails.setUpdatedAt(Utils.getCurrentTime());
-    restaurantsDetails.setCreatedAt(Utils.getCurrentTime());
-    restaurantsDetails.setActive(true);
-    return mongoOperations.save(restaurantsDetails).getId();
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+      restaurantDetails.setOpeningTime(LocalTime.parse(restaurantDto.getOpeningHours(), formatter));
+      restaurantDetails.setClosingTime(LocalTime.parse(restaurantDto.getClosingHours(), formatter));
+      restaurantDetails.setId(Utils.generateId());
+      restaurantDetails.setUpdatedAt(Utils.getCurrentTime());
+      restaurantDetails.setCreatedAt(Utils.getCurrentTime());
+      restaurantDetails.setActive(true);
+      return mongoOperations.save(restaurantDetails).getId();
   }
 
   @Override
   public Object getRestaurantDetails(String id) {
     Query query = new Query(Criteria.where(Constant.COMMON_ID).is(id));
-    return mongoOperations.findOne(query, Restaurants.class);
+    return mongoOperations.findOne(query, Restaurant.class);
   }
 
   @Override
@@ -106,37 +110,37 @@ public class RestaurantServiceImpl implements RestaurantService {
           new Distance(listRestaurantConfigDto.getDistanceInKm(), Metrics.KILOMETERS));
       query.addCriteria(Criteria.where("location").withinSphere(myCircle));
    }
-    return mongoOperations.find(query, Restaurants.class);
+    return mongoOperations.find(query, Restaurant.class);
   }
 
   @Override
   public Object getRestaurantMenuCustomizableList(String restaurantId, String menuId) {
-    Restaurants restaurants = (Restaurants) getRestaurantDetails(restaurantId);
+    Restaurant restaurant = (Restaurant) getRestaurantDetails(restaurantId);
 
-    int menuItemMatchedIndex = IntStream.range(0, restaurants.getMenuItemsList().size())
-        .filter(index -> restaurants.getMenuItemsList().get(index).getId().equalsIgnoreCase(menuId))
+    int menuItemMatchedIndex = IntStream.range(0, restaurant.getMenuItemsList().size())
+        .filter(index -> restaurant.getMenuItemsList().get(index).getId().equalsIgnoreCase(menuId))
         .findFirst()
         .getAsInt();
 
-    return restaurants.getMenuItemsList().get(menuItemMatchedIndex).getCustomizations();
+    return restaurant.getMenuItemsList().get(menuItemMatchedIndex).getCustomizations();
   }
 
   @Override
   public Object createMenuItemForRestaurant(String restaurantId, MenuItems menuItems) {
-    Restaurants restaurants = (Restaurants) getRestaurantDetails(restaurantId);
+    Restaurant restaurant = (Restaurant) getRestaurantDetails(restaurantId);
     menuItems.setId(Utils.generateId());
-    if(null != restaurants){
-      if(null != restaurants.getMenuItemsList() && restaurants.getMenuItemsList().size()>0){
+    if(null != restaurant){
+      if(null != restaurant.getMenuItemsList() && restaurant.getMenuItemsList().size()>0){
         List<MenuItems> existingMenuItemsList = new ArrayList<>();
-        existingMenuItemsList.addAll(restaurants.getMenuItemsList());
+        existingMenuItemsList.addAll(restaurant.getMenuItemsList());
         existingMenuItemsList.add(menuItems);
-        restaurants.setMenuItemsList(existingMenuItemsList);
-        mongoOperations.save(restaurants);
+        restaurant.setMenuItemsList(existingMenuItemsList);
+        mongoOperations.save(restaurant);
       } else {
         List<MenuItems> existingMenuItemsList = new ArrayList<>();
         existingMenuItemsList.add(menuItems);
-        restaurants.setMenuItemsList(existingMenuItemsList);
-        mongoOperations.save(restaurants);
+        restaurant.setMenuItemsList(existingMenuItemsList);
+        mongoOperations.save(restaurant);
       }
       return "Successfully Added";
     }
@@ -145,8 +149,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public MenuListDto getMenuItemsBasedUponFilters(RestaurantDetailFilterDto filterDto) {
-    Restaurants restaurants = (Restaurants) getRestaurantDetails(filterDto.getRestaurantId());
-    List<MenuItems> menuItemsList = restaurants.getMenuItemsList();
+    Restaurant restaurant = (Restaurant) getRestaurantDetails(filterDto.getRestaurantId());
+    List<MenuItems> menuItemsList = restaurant.getMenuItemsList();
     MenuListDto menuListDto = new MenuListDto();
 
     List<MenuBriefInfoDto> diningMenuList = new ArrayList<>();
@@ -176,49 +180,49 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public Object addReviewToRestaurants(String id, ReviewDto review) {
-    Restaurants restaurants = (Restaurants) getRestaurantDetails(id);
+    Restaurant restaurant = (Restaurant) getRestaurantDetails(id);
 
     if(review.isDinning()){
-      if(restaurants.getDiningReview() != null) {
-        if (null != restaurants.getDiningReview().getReviewList() && restaurants.getDiningReview().getReviewList().size()>0){
-          List<Review> reviewList = restaurants.getDiningReview().getReviewList();
+      if(restaurant.getDiningReview() != null) {
+        if (null != restaurant.getDiningReview().getReviewList() && restaurant.getDiningReview().getReviewList().size()>0){
+          List<Review> reviewList = restaurant.getDiningReview().getReviewList();
           reviewList.add(review);
-          restaurants.getDiningReview().setReviewList(reviewList);
-          mongoOperations.save(restaurants);
+          restaurant.getDiningReview().setReviewList(reviewList);
+          mongoOperations.save(restaurant);
         } else {
           List<Review> reviewList = new ArrayList<>();
           reviewList.add(review);
-          restaurants.getDiningReview().setReviewList(reviewList);
-          mongoOperations.save(restaurants);
+          restaurant.getDiningReview().setReviewList(reviewList);
+          mongoOperations.save(restaurant);
         }
       } else {
         Ratings ratings = new Ratings();
         List<Review> reviewList = new ArrayList<>();
         reviewList.add(review);
         ratings.setReviewList(reviewList);
-        restaurants.setDiningReview(ratings);
-        mongoOperations.save(restaurants);
+        restaurant.setDiningReview(ratings);
+        mongoOperations.save(restaurant);
       }
     } else {
-      if(restaurants.getServiceReview() != null) {
-        if (null != restaurants.getServiceReview().getReviewList() && restaurants.getServiceReview().getReviewList().size()>0){
-          List<Review> reviewList = restaurants.getServiceReview().getReviewList();
+      if(restaurant.getServiceReview() != null) {
+        if (null != restaurant.getServiceReview().getReviewList() && restaurant.getServiceReview().getReviewList().size()>0){
+          List<Review> reviewList = restaurant.getServiceReview().getReviewList();
           reviewList.add(review);
-          restaurants.getServiceReview().setReviewList(reviewList);
-          mongoOperations.save(restaurants);
+          restaurant.getServiceReview().setReviewList(reviewList);
+          mongoOperations.save(restaurant);
         } else {
           List<Review> reviewList = new ArrayList<>();
           reviewList.add(review);
-          restaurants.getServiceReview().setReviewList(reviewList);
-          mongoOperations.save(restaurants);
+          restaurant.getServiceReview().setReviewList(reviewList);
+          mongoOperations.save(restaurant);
         }
       } else {
         Ratings ratings = new Ratings();
         List<Review> reviewList = new ArrayList<>();
         reviewList.add(review);
         ratings.setReviewList(reviewList);
-        restaurants.setServiceReview(ratings);
-        mongoOperations.save(restaurants);
+        restaurant.setServiceReview(ratings);
+        mongoOperations.save(restaurant);
       }
     }
     return "Successfully Added";
@@ -226,15 +230,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public Object listReviewForRestaurant(String id, int page, int size) {
-    Restaurants restaurants = (Restaurants) getRestaurantDetails(id);
+    Restaurant restaurant = (Restaurant) getRestaurantDetails(id);
     List<Review> reviewList = new ArrayList<>();
 
-    if(null != restaurants.getDiningReview() && null != restaurants.getDiningReview().getReviewList() && restaurants.getDiningReview().getReviewList().size()>0) {
-      reviewList.addAll(restaurants.getDiningReview().getReviewList());
+    if(null != restaurant.getDiningReview() && null != restaurant.getDiningReview().getReviewList() && restaurant.getDiningReview().getReviewList().size()>0) {
+      reviewList.addAll(restaurant.getDiningReview().getReviewList());
     }
 
-    if(null != restaurants.getServiceReview() && null != restaurants.getServiceReview().getReviewList() && restaurants.getServiceReview().getReviewList().size()>0) {
-      reviewList.addAll(restaurants.getServiceReview().getReviewList());
+    if(null != restaurant.getServiceReview() && null != restaurant.getServiceReview().getReviewList() && restaurant.getServiceReview().getReviewList().size()>0) {
+      reviewList.addAll(restaurant.getServiceReview().getReviewList());
     }
     return reviewList;
   }

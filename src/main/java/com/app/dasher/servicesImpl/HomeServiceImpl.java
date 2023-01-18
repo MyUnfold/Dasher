@@ -1,6 +1,6 @@
 package com.app.dasher.servicesImpl;
 
-import com.app.dasher.models.Resturant.Restaurants;
+import com.app.dasher.models.Resturant.Restaurant;
 import com.app.dasher.models.Resturant.dto.ListRestaurantConfigDto;
 import com.app.dasher.models.Resturant.dto.RestaurantDetailDto;
 import com.app.dasher.models.Resturant.dto.RestaurantViewMoreInfoDto;
@@ -47,17 +47,19 @@ public class HomeServiceImpl implements HomeService {
 
     List<ListMoods> moodsList = (List<ListMoods>) adminService.listOfMoods();
     List<ListCoupons> couponsList = (List<ListCoupons>) adminService.listOfCoupon();
-    List<Restaurants> restaurantsList = (List<Restaurants>) restaurantService.listRestaurantBasedUponConfig(listRestaurantConfigDto);
+    List<Restaurant> restaurantList = (List<Restaurant>) restaurantService.listRestaurantBasedUponConfig(listRestaurantConfigDto);
 
     List<RestaurantInfoDto> recommendedRestaurants = new ArrayList<>();
 
-    if(null != restaurantsList && restaurantsList.size()>0){
-      for(Restaurants restaurant: restaurantsList){
+    if(null != restaurantList && restaurantList.size()>0){
+      for(Restaurant restaurant: restaurantList){
         RestaurantInfoDto restaurantInfoDto = new RestaurantInfoDto();
         restaurantInfoDto.setName(restaurant.getName());
         restaurantInfoDto.setCuisine(restaurant.getCuisine());
         restaurantInfoDto.setImageUrl(restaurant.getLogoUrl());
         restaurantInfoDto.setId(restaurant.getId());
+        restaurantInfoDto.setOpeningHours(restaurant.getOpeningTime());
+        restaurantInfoDto.setClosingHours(restaurant.getClosingTime());
         restaurantInfoDto.setOpen(true);
         restaurantInfoDto.setRatings(ThreadLocalRandom.current().nextDouble(0.0, 10.0));
         restaurantInfoDto.setDeliveryTime(Utils.randomInteger(10, 50));
@@ -74,17 +76,17 @@ public class HomeServiceImpl implements HomeService {
 
   @Override
   public Object getRestaurantDetails(RestaurantDetailFilterDto filterDto) {
-    Restaurants restaurants = (Restaurants) restaurantService.getRestaurantDetails(filterDto.getRestaurantId());
+    Restaurant restaurant = (Restaurant) restaurantService.getRestaurantDetails(filterDto.getRestaurantId());
 
     RestaurantDetailDto restaurantInfoDto = new RestaurantDetailDto();
     RestaurantViewMoreInfoDto restaurantViewMoreInfoDto = new RestaurantViewMoreInfoDto();
 
-    restaurantInfoDto.setName(restaurants.getName());
-    restaurantInfoDto.setId(restaurants.getId());
-    restaurantInfoDto.setLogoUrl(restaurants.getLogoUrl());
-    restaurantInfoDto.setLat(restaurants.getLocation().getCoordinates().get(1));
-    restaurantInfoDto.setLng(restaurants.getLocation().getCoordinates().get(0));
-    restaurantInfoDto.setTags(restaurants.getTags());
+    restaurantInfoDto.setName(restaurant.getName());
+    restaurantInfoDto.setId(restaurant.getId());
+    restaurantInfoDto.setLogoUrl(restaurant.getLogoUrl());
+    restaurantInfoDto.setLat(restaurant.getLocation().getCoordinates().get(1));
+    restaurantInfoDto.setLng(restaurant.getLocation().getCoordinates().get(0));
+    restaurantInfoDto.setTags(restaurant.getTags());
     restaurantInfoDto.setMenuItemsList(restaurantService.getMenuItemsBasedUponFilters(filterDto));
 
     ReviewerDto reviewerDto = new ReviewerDto();
@@ -98,16 +100,16 @@ public class HomeServiceImpl implements HomeService {
     restaurantInfoDto.setDiningReview(reviewerDto);
     restaurantInfoDto.setServiceReview(reviewerDto1);
 
-    restaurantViewMoreInfoDto.setCustomAddress(restaurants.getCustomAddress());
-    restaurantViewMoreInfoDto.setLat(restaurants.getLocation().getCoordinates().get(1));
-    restaurantViewMoreInfoDto.setLng(restaurants.getLocation().getCoordinates().get(0));
+    restaurantViewMoreInfoDto.setCustomAddress(restaurant.getCustomAddress());
+    restaurantViewMoreInfoDto.setLat(restaurant.getLocation().getCoordinates().get(1));
+    restaurantViewMoreInfoDto.setLng(restaurant.getLocation().getCoordinates().get(0));
     restaurantViewMoreInfoDto.setMetaLine("Quick bites, Fast Food");
-    restaurantViewMoreInfoDto.setName(restaurants.getName());
+    restaurantViewMoreInfoDto.setName(restaurant.getName());
 
     restaurantViewMoreInfoDto.setServiceReview(reviewerDto);
     restaurantViewMoreInfoDto.setDiningReview(reviewerDto1);
-    restaurantViewMoreInfoDto.setLogoUrl(restaurants.getLogoUrl());
-    restaurantViewMoreInfoDto.setImageUrl(restaurants.getImageUrl());
+    restaurantViewMoreInfoDto.setLogoUrl(restaurant.getLogoUrl());
+    restaurantViewMoreInfoDto.setImageUrl(restaurant.getImageUrl());
 
     restaurantViewMoreInfoDto.setTrendingMenu(restaurantService.getMenuItemsBasedUponFilters(filterDto));
     restaurantInfoDto.setRestaurantViewMoreInfoDto(restaurantViewMoreInfoDto);

@@ -1,5 +1,6 @@
 package com.app.dasher.models.dashboard;
 
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -15,6 +16,24 @@ public class RestaurantInfoDto {
   private boolean isOpen;
   private List<String> cuisine;
   private int deliveryTime;
+  private LocalTime openingHours;
+  private LocalTime closingHours;
+
+  public LocalTime getOpeningHours() {
+    return openingHours;
+  }
+
+  public void setOpeningHours(LocalTime openingHours) {
+    this.openingHours = openingHours;
+  }
+
+  public LocalTime getClosingHours() {
+    return closingHours;
+  }
+
+  public void setClosingHours(LocalTime closingHours) {
+    this.closingHours = closingHours;
+  }
 
   public String getId() {
     return id;

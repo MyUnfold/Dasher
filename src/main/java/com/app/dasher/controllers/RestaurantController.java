@@ -1,9 +1,10 @@
 package com.app.dasher.controllers;
 
 import com.app.dasher.models.ResponseDto;
-import com.app.dasher.models.Resturant.Restaurants;
+import com.app.dasher.models.Resturant.Restaurant;
 import com.app.dasher.models.Resturant.Review.dto.ReviewDto;
 import com.app.dasher.models.Resturant.dto.ListRestaurantConfigDto;
+import com.app.dasher.models.Resturant.dto.RestaurantDto;
 import com.app.dasher.models.Resturant.menu.MenuItems;
 import com.app.dasher.services.RestaurantService;
 import com.app.dasher.utils.Constant;
@@ -36,9 +37,9 @@ public class RestaurantController {
   RestaurantService restaurantService;
 
   @PostMapping("/create")
-  public Mono<ResponseEntity<ResponseDto<Object>>> createRestaurant(@RequestBody Restaurants restaurants) {
+  public Mono<ResponseEntity<ResponseDto<Object>>> createRestaurant(@RequestBody RestaurantDto restaurant) {
     return Mono
-        .just(restaurantService.createRestaurant(restaurants))
+        .just(restaurantService.createRestaurant(restaurant))
         .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
         .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
         .onErrorResume(
