@@ -9,22 +9,23 @@ import java.util.List;
  * @company NextUp
  */
 public class Loc {
-    private String type;
-    private List<Double> coordinates;
 
-    public String getType() {
-        return type;
-    }
+  private String type;
+  private List<Double> coordinates;
 
-    public void setType(String type) {
-        this.type = type;
-    }
+  public String getType() {
+    return type;
+  }
 
-    public List<Double> getCoordinates() {
-        return coordinates;
-    }
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    public void setCoordinates(List<Double> coordinates) {
-        this.coordinates = coordinates;
-    }
+  public List<Double> getCoordinates() {
+    return coordinates;
+  }
+
+  public void setCoordinates(List<Double> coordinates) {
+    this.coordinates = coordinates;
+  }
 }

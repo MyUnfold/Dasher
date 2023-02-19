@@ -1,7 +1,6 @@
 package com.app.dasher.models.Resturant.dto;
 
 import com.app.dasher.models.Resturant.ServiceType;
-import com.app.dasher.models.common.GeoLocation;
 
 /**
  * @author Paly
@@ -10,14 +9,14 @@ import com.app.dasher.models.common.GeoLocation;
  * @company NextUp
  */
 public class ListRestaurantConfigDto {
+
   private String name;
   private Double lat;
   private Double lng;
   private double distanceInKm;
-  private String ratings;
+  private double ratings;
   private ServiceType serviceType;
-  private int openingHours;
-  private int closingHours;
+  private int currentTimeInHours;
   private String cuisine;
 
   public String getCuisine() {
@@ -60,11 +59,11 @@ public class ListRestaurantConfigDto {
     this.distanceInKm = distanceInKm;
   }
 
-  public String getRatings() {
+  public double getRatings() {
     return ratings;
   }
 
-  public void setRatings(String ratings) {
+  public void setRatings(double ratings) {
     this.ratings = ratings;
   }
 
@@ -76,19 +75,11 @@ public class ListRestaurantConfigDto {
     this.serviceType = serviceType;
   }
 
-  public int getOpeningHours() {
-    return openingHours;
+  public int getCurrentTimeInHours() {
+    return currentTimeInHours;
   }
 
-  public void setOpeningHours(int openingHours) {
-    this.openingHours = openingHours;
-  }
-
-  public int getClosingHours() {
-    return closingHours;
-  }
-
-  public void setClosingHours(int closingHours) {
-    this.closingHours = closingHours;
+  public void setCurrentTimeInHours(int currentTimeInHours) {
+    this.currentTimeInHours = currentTimeInHours;
   }
 }

@@ -10,6 +10,7 @@ import java.util.List;
  * @company NextUp
  */
 public class MenuListDto {
+
   private List<MenuBriefInfoDto> diningMenuList;
   private List<MenuBriefInfoDto> pickUpMenuList;
 

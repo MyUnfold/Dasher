@@ -92,8 +92,9 @@ public class AdminServiceImpl implements AdminService {
     Query query = new Query();
     query.addCriteria(Criteria.where("property_type").is(propertyType));
 
-    if(null != keyword){
-      query.addCriteria(Criteria.where("name").regex(Pattern.compile(keyword, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
+    if (null != keyword) {
+      query.addCriteria(Criteria.where("name")
+          .regex(Pattern.compile(keyword, Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)));
     }
     return mongoOperations.find(query, AdminProperties.class);
   }

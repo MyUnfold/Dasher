@@ -1,7 +1,6 @@
 package com.app.dasher.models.Resturant.dto;
 
 import com.app.dasher.models.Resturant.menu.dto.MenuListDto;
-import com.app.dasher.models.dashboard.MenuBriefInfoDto;
 import java.util.List;
 
 /**
@@ -11,6 +10,7 @@ import java.util.List;
  * @company NextUp
  */
 public class RestaurantViewMoreInfoDto {
+
   private List<String> imageUrl;
   private String logoUrl;
   private String name;

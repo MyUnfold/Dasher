@@ -7,41 +7,42 @@ package com.app.dasher.models.common;
  * @company NextUp
  */
 public class ImageInfo {
-    private String muxId;
-    private String imageUrl;
-    private Long addedAt;
-    private int numberOfLikes;
 
-    public String getMuxId() {
-        return muxId;
-    }
+  private String muxId;
+  private String imageUrl;
+  private Long addedAt;
+  private int numberOfLikes;
 
-    public void setMuxId(String muxId) {
-        this.muxId = muxId;
-    }
+  public String getMuxId() {
+    return muxId;
+  }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
+  public void setMuxId(String muxId) {
+    this.muxId = muxId;
+  }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+  public String getImageUrl() {
+    return imageUrl;
+  }
 
-    public Long getAddedAt() {
-        return addedAt;
-    }
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
 
-    public void setAddedAt(Long addedAt) {
-        this.addedAt = addedAt;
-    }
+  public Long getAddedAt() {
+    return addedAt;
+  }
+
+  public void setAddedAt(Long addedAt) {
+    this.addedAt = addedAt;
+  }
 
 
-    public int getNumberOfLikes() {
-        return numberOfLikes;
-    }
+  public int getNumberOfLikes() {
+    return numberOfLikes;
+  }
 
-    public void setNumberOfLikes(int numberOfLikes) {
-        this.numberOfLikes = numberOfLikes;
-    }
+  public void setNumberOfLikes(int numberOfLikes) {
+    this.numberOfLikes = numberOfLikes;
+  }
 }

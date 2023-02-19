@@ -10,6 +10,7 @@ import com.app.dasher.models.dashboard.RestaurantDetailFilterDto;
  * @company NextUp
  */
 public interface HomeService {
+
   Object getUserDashboard(ListRestaurantConfigDto listRestaurantConfigDto);
 
   Object getRestaurantDetails(RestaurantDetailFilterDto filterDto);

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
  * @company NextUp
  */
 public interface UserInfoService {
+
   ResponseEntity<Object> createUser(PersonalInfo personalInfo);
 
   Object generateOtp(OtpRequestDto otpRequestDto, String userId);

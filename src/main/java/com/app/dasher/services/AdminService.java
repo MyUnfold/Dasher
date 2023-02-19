@@ -15,10 +15,15 @@ import java.util.List;
 public interface AdminService {
 
   Object createProperty(List<AdminProperties> adminPropertiesList);
+
   Object createMood(List<Moods> moodsList);
+
   Object createCoupon(List<Coupon> couponList);
+
   Object getPropertyBasedUponFilter(PropertyType propertyType, String keyword);
+
   Object listOfMoods();
+
   Object listOfCoupon();
 
 }

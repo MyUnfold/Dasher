@@ -1,6 +1,7 @@
 package com.app.dasher.servicesImpl;
 
 import com.app.dasher.models.Resturant.Restaurant;
+import com.app.dasher.models.Resturant.ServiceType;
 import com.app.dasher.models.Resturant.dto.ListRestaurantConfigDto;
 import com.app.dasher.models.Resturant.dto.RestaurantDetailDto;
 import com.app.dasher.models.Resturant.dto.RestaurantViewMoreInfoDto;
@@ -47,12 +48,13 @@ public class HomeServiceImpl implements HomeService {
 
     List<ListMoods> moodsList = (List<ListMoods>) adminService.listOfMoods();
     List<ListCoupons> couponsList = (List<ListCoupons>) adminService.listOfCoupon();
-    List<Restaurant> restaurantList = (List<Restaurant>) restaurantService.listRestaurantBasedUponConfig(listRestaurantConfigDto);
+    List<Restaurant> restaurantList = (List<Restaurant>) restaurantService.listRestaurantBasedUponConfig(
+        listRestaurantConfigDto);
 
     List<RestaurantInfoDto> recommendedRestaurants = new ArrayList<>();
 
-    if(null != restaurantList && restaurantList.size()>0){
-      for(Restaurant restaurant: restaurantList){
+    if (null != restaurantList && restaurantList.size() > 0) {
+      for (Restaurant restaurant : restaurantList) {
         RestaurantInfoDto restaurantInfoDto = new RestaurantInfoDto();
         restaurantInfoDto.setName(restaurant.getName());
         restaurantInfoDto.setCuisine(restaurant.getCuisine());
@@ -61,7 +63,15 @@ public class HomeServiceImpl implements HomeService {
         restaurantInfoDto.setOpeningHours(restaurant.getOpeningTime());
         restaurantInfoDto.setClosingHours(restaurant.getClosingTime());
         restaurantInfoDto.setOpen(true);
-        restaurantInfoDto.setRatings(ThreadLocalRandom.current().nextDouble(0.0, 10.0));
+        if(restaurant.getServiceType().equals(ServiceType.DINNING)) {
+          if(restaurant.getDiningReview() != null) {
+            restaurantInfoDto.setRatings(restaurant.getDiningReview().getRating());
+          }
+        } else {
+          if(restaurant.getServiceReview() != null) {
+            restaurantInfoDto.setRatings(restaurant.getServiceReview().getRating());
+          }
+        }
         restaurantInfoDto.setDeliveryTime(Utils.randomInteger(10, 50));
         recommendedRestaurants.add(restaurantInfoDto);
       }
@@ -76,7 +86,8 @@ public class HomeServiceImpl implements HomeService {
 
   @Override
   public Object getRestaurantDetails(RestaurantDetailFilterDto filterDto) {
-    Restaurant restaurant = (Restaurant) restaurantService.getRestaurantDetails(filterDto.getRestaurantId());
+    Restaurant restaurant = (Restaurant) restaurantService.getRestaurantDetails(
+        filterDto.getRestaurantId());
 
     RestaurantDetailDto restaurantInfoDto = new RestaurantDetailDto();
     RestaurantViewMoreInfoDto restaurantViewMoreInfoDto = new RestaurantViewMoreInfoDto();
@@ -111,7 +122,8 @@ public class HomeServiceImpl implements HomeService {
     restaurantViewMoreInfoDto.setLogoUrl(restaurant.getLogoUrl());
     restaurantViewMoreInfoDto.setImageUrl(restaurant.getImageUrl());
 
-    restaurantViewMoreInfoDto.setTrendingMenu(restaurantService.getMenuItemsBasedUponFilters(filterDto));
+    restaurantViewMoreInfoDto.setTrendingMenu(
+        restaurantService.getMenuItemsBasedUponFilters(filterDto));
     restaurantInfoDto.setRestaurantViewMoreInfoDto(restaurantViewMoreInfoDto);
     return restaurantInfoDto;
   }

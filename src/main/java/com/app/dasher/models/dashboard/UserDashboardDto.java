@@ -10,6 +10,7 @@ import java.util.List;
  * @company NextUp
  */
 public class UserDashboardDto {
+
   private List<OrderHistory> orders;
   private List<ListMoods> moodsList;
   private List<RestaurantInfoDto> recommendation;

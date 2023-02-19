@@ -18,6 +18,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/app/dasher/models/Resturant/dto/ListRestaurantConfigDto.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/app/dasher/models/Resturant/dto/RestaurantDto.java">
           <value>
             <set />
@@ -33,6 +38,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/app/dasher/security/JwtTokenFilter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/app/dasher/security/WebSecurityConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/app/dasher/services/RestaurantService.java">
           <value>
             <set />
@@ -44,6 +59,196 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/app/dasher/servicesImpl/RestaurantServiceImpl.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/com/app/dasher/utils/Utils.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/build.gradle.kts">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/SixRingsApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/exception.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/exception/ControllerExceptionHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Agency.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Agency/Agency.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Agency/Agent.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Agent.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Availability.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/BaseModel.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/BaseModell.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Brand.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Client.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Clients.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Contract.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/ContractTemplate.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Industry.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/Term.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/brand/Brand.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/clients/Availability.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/clients/Client.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/common/PersonalInfo.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/contrct/Contract.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/user/Role.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/models/user/UserInfo.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/repository/UserRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/security/JwtTokenProvider.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/security/UserAuthDetails.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/services/AgencyService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/services/AgentService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/services/BrandService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/services/ClientService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/services/ContractService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/services/ContractTemplateService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/java/com/ftc/sixrings/utils/Utils.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../sixRings/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="/a.dummy">
           <value>
             <set />
           </value>

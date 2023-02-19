@@ -8,23 +8,24 @@ package com.app.dasher.models.common;
  * @company NextUp
  */
 public class GeoLocation {
-    private String name;
-    private Loc loc;
+
+  private String name;
+  private Loc loc;
 
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public Loc getLoc() {
-        return loc;
-    }
+  public Loc getLoc() {
+    return loc;
+  }
 
-    public void setLoc(Loc loc) {
-        this.loc = loc;
-    }
+  public void setLoc(Loc loc) {
+    this.loc = loc;
+  }
 }

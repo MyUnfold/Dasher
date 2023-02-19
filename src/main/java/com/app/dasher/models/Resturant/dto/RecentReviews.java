@@ -9,6 +9,7 @@ import java.util.List;
  * @company NextUp
  */
 public class RecentReviews {
+
   private String name;
   private String profilePictureUrl;
   private String comment;

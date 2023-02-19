@@ -10,6 +10,7 @@ import java.util.List;
  * @company NextUp
  */
 public class UserPreferencesDto {
+
   private List<AdminProperties> interestsList;
   private List<AdminProperties> allergiesList;
 

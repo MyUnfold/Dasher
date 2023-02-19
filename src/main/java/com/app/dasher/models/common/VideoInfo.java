@@ -7,58 +7,59 @@ package com.app.dasher.models.common;
  * @company NextUp
  */
 public class VideoInfo {
-    private String muxId;
-    private String name;
-    private String thumbnailUrl;
-    private String videoUrl;
-    private Long addedAt;
-    private int numberOfLikes;
 
-    public int getNumberOfLikes() {
-        return numberOfLikes;
-    }
+  private String muxId;
+  private String name;
+  private String thumbnailUrl;
+  private String videoUrl;
+  private Long addedAt;
+  private int numberOfLikes;
 
-    public void setNumberOfLikes(int numberOfLikes) {
-        this.numberOfLikes = numberOfLikes;
-    }
+  public int getNumberOfLikes() {
+    return numberOfLikes;
+  }
 
-    public Long getAddedAt() {
-        return addedAt;
-    }
+  public void setNumberOfLikes(int numberOfLikes) {
+    this.numberOfLikes = numberOfLikes;
+  }
 
-    public void setAddedAt(Long addedAt) {
-        this.addedAt = addedAt;
-    }
+  public Long getAddedAt() {
+    return addedAt;
+  }
 
-    public String getMuxId() {
-        return muxId;
-    }
+  public void setAddedAt(Long addedAt) {
+    this.addedAt = addedAt;
+  }
 
-    public void setMuxId(String muxId) {
-        this.muxId = muxId;
-    }
+  public String getMuxId() {
+    return muxId;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setMuxId(String muxId) {
+    this.muxId = muxId;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
+  public String getThumbnailUrl() {
+    return thumbnailUrl;
+  }
 
-    public String getVideoUrl() {
-        return videoUrl;
-    }
+  public void setThumbnailUrl(String thumbnailUrl) {
+    this.thumbnailUrl = thumbnailUrl;
+  }
 
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
-    }
+  public String getVideoUrl() {
+    return videoUrl;
+  }
+
+  public void setVideoUrl(String videoUrl) {
+    this.videoUrl = videoUrl;
+  }
 }

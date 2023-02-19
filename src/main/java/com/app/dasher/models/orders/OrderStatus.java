@@ -7,5 +7,5 @@ package com.app.dasher.models.orders;
  * @company NextUp
  */
 public enum OrderStatus {
-  PREPARING,PLACED
+  PREPARING, PLACED
 }

@@ -17,11 +17,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value
-            = {IllegalArgumentException.class, NullPointerException.class, IllegalStateException.class, ObjectNotFoundException.class})
-    protected ResponseEntity<Object> handleConflict(
-            RuntimeException ex, WebRequest request) {
-        ApiError apiError = null;
+  @ExceptionHandler(value
+      = {IllegalArgumentException.class, NullPointerException.class, IllegalStateException.class,
+      ObjectNotFoundException.class})
+  protected ResponseEntity<Object> handleConflict(
+      RuntimeException ex, WebRequest request) {
+    ApiError apiError = null;
 //        switch (ex) {
 ////          case IllegalStateException illegalStateException -> new ApiError(HttpStatus.CONFLICT,
 ////              illegalStateException.getMessage(), illegalStateException.getMessage());
@@ -30,6 +31,6 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 //          default -> new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex.getMessage());
 //        };
 
-        return handleExceptionInternal(ex, apiError, new HttpHeaders(), apiError.getStatus(), request);
-    }
+    return handleExceptionInternal(ex, apiError, new HttpHeaders(), apiError.getStatus(), request);
+  }
 }

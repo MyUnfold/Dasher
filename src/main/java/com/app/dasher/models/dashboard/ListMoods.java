@@ -8,4 +8,6 @@ import com.app.dasher.models.mood.Moods;
  * @date 26/11/22 7:12 pm
  * @company NextUp
  */
-public class ListMoods extends Moods { }
+public class ListMoods extends Moods {
+
+}

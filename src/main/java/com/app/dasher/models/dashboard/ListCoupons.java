@@ -8,4 +8,6 @@ import com.app.dasher.models.coupon.Coupon;
  * @date 26/11/22 7:14 pm
  * @company NextUp
  */
-public class ListCoupons extends Coupon { }
+public class ListCoupons extends Coupon {
+
+}

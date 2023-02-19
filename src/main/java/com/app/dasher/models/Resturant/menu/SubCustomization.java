@@ -7,6 +7,7 @@ package com.app.dasher.models.Resturant.menu;
  * @company NextUp
  */
 public class SubCustomization {
+
   private double price;
   private String name;
 

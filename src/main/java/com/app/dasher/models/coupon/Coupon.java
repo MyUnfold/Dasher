@@ -19,6 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @Document(collection = "tbl_coupon")
 public class Coupon extends BaseModel {
+
   @JsonIgnore
   @Id
   private ObjectId objectId;

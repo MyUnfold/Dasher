@@ -9,6 +9,7 @@ import com.app.dasher.models.Resturant.Restaurant;
  * @company NextUp
  */
 public class RestaurantDto extends Restaurant {
+
   private String openingHours;
   private String closingHours;
 

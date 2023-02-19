@@ -7,6 +7,7 @@ package com.app.dasher.models.dashboard;
  * @company NextUp
  */
 public class RestaurantDetailFilterDto {
+
   private String userId;
   private String restaurantId;
   private String menuSearch;

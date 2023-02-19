@@ -9,6 +9,7 @@ import com.app.dasher.models.Resturant.Review.Review;
  * @company NextUp
  */
 public class ReviewDto extends Review {
+
   private boolean isDinning;
 
   public boolean isDinning() {

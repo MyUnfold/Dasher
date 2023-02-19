@@ -7,6 +7,7 @@ package com.app.dasher.models.Resturant;
  * @company NextUp
  */
 public class ContactInfo {
+
   private String name;
   private String contactNumber;
 

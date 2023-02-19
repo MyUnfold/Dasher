@@ -22,6 +22,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @Document(collection = "tbl_order_history")
 public class OrderHistory extends BaseModel {
+
   @JsonIgnore
   @Id
   private ObjectId objectId;

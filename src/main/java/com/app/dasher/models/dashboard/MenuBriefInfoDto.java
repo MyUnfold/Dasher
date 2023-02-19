@@ -9,6 +9,7 @@ import java.util.List;
  * @company NextUp
  */
 public class MenuBriefInfoDto {
+
   private String name;
   private List<String> imageUrl;
   private double price;

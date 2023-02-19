@@ -10,6 +10,7 @@ import java.util.List;
  * @company NextUp
  */
 public class Ratings {
+
   private double rating;
   private int numberOfUsers;
   private List<Review> reviewList;

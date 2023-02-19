@@ -37,11 +37,13 @@ public class AdminController {
   AdminService adminService;
 
   @PostMapping("/property/create")
-  public Mono<ResponseEntity<ResponseDto<Object>>> createProperty(@RequestBody List<AdminProperties> adminPropertiesList) {
+  public Mono<ResponseEntity<ResponseDto<Object>>> createProperty(
+      @RequestBody List<AdminProperties> adminPropertiesList) {
     return Mono
         .just(adminService.createProperty(adminPropertiesList))
         .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
-        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
+        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class),
+            HttpStatus.BAD_REQUEST))
         .onErrorResume(
             throwable -> Mono.just(new ResponseEntity<>(ResponseDto.fail(throwable.getMessage(),
                 String.class), HttpStatus.BAD_REQUEST)));
@@ -52,29 +54,35 @@ public class AdminController {
     return Mono
         .just(adminService.createMood(moodsList))
         .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
-        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
+        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class),
+            HttpStatus.BAD_REQUEST))
         .onErrorResume(
             throwable -> Mono.just(new ResponseEntity<>(ResponseDto.fail(throwable.getMessage(),
                 String.class), HttpStatus.BAD_REQUEST)));
   }
 
   @PostMapping("/coupon/create")
-  public Mono<ResponseEntity<ResponseDto<Object>>> createCoupon(@RequestBody List<Coupon> couponList) {
+  public Mono<ResponseEntity<ResponseDto<Object>>> createCoupon(
+      @RequestBody List<Coupon> couponList) {
     return Mono
         .just(adminService.createCoupon(couponList))
         .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
-        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
+        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class),
+            HttpStatus.BAD_REQUEST))
         .onErrorResume(
             throwable -> Mono.just(new ResponseEntity<>(ResponseDto.fail(throwable.getMessage(),
                 String.class), HttpStatus.BAD_REQUEST)));
   }
 
   @GetMapping("/property/create/{type}")
-  public Mono<ResponseEntity<ResponseDto<Object>>> getPropertyBasedUponFilter(@PathVariable PropertyType type, @RequestParam(value = "search", required = false) String keyword) {
+  public Mono<ResponseEntity<ResponseDto<Object>>> getPropertyBasedUponFilter(
+      @PathVariable PropertyType type,
+      @RequestParam(value = "search", required = false) String keyword) {
     return Mono
         .just(adminService.getPropertyBasedUponFilter(type, keyword))
         .map(result -> new ResponseEntity<>(ResponseDto.success(result), HttpStatus.OK))
-        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class), HttpStatus.BAD_REQUEST))
+        .defaultIfEmpty(new ResponseEntity<>(ResponseDto.fail(Constant.BAD_REQUEST, String.class),
+            HttpStatus.BAD_REQUEST))
         .onErrorResume(
             throwable -> Mono.just(new ResponseEntity<>(ResponseDto.fail(throwable.getMessage(),
                 String.class), HttpStatus.BAD_REQUEST)));

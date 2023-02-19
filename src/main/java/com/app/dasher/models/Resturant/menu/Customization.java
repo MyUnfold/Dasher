@@ -9,6 +9,7 @@ import java.util.List;
  * @company NextUp
  */
 public class Customization {
+
   private String name;
   private double price;
   private List<SubCustomization> subCustomizationList;

@@ -8,46 +8,47 @@ package com.app.dasher.models;
  */
 
 public class ResponseDto<T> {
-    private Boolean success;
-    private T data;
-    private String error;
 
-    public ResponseDto(Boolean success, T data, String error) {
-        this.success = success;
-        this.data = data;
-        this.error = error;
-    }
+  private Boolean success;
+  private T data;
+  private String error;
 
-    public static <T> ResponseDto<T> success(T data) {
-        return new ResponseDto<T>(true, data, null);
-    }
+  public ResponseDto(Boolean success, T data, String error) {
+    this.success = success;
+    this.data = data;
+    this.error = error;
+  }
 
-    @SuppressWarnings("unchecked")
-    public static <T, S> ResponseDto<T> fail(String error, S clazz) {
-        return (ResponseDto<T>) new ResponseDto<S>(false, null, error);
-    }
+  public static <T> ResponseDto<T> success(T data) {
+    return new ResponseDto<T>(true, data, null);
+  }
 
-    public Boolean getSuccess() {
-        return success;
-    }
+  @SuppressWarnings("unchecked")
+  public static <T, S> ResponseDto<T> fail(String error, S clazz) {
+    return (ResponseDto<T>) new ResponseDto<S>(false, null, error);
+  }
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
+  public Boolean getSuccess() {
+    return success;
+  }
 
-    public T getData() {
-        return data;
-    }
+  public void setSuccess(Boolean success) {
+    this.success = success;
+  }
 
-    public void setData(T data) {
-        this.data = data;
-    }
+  public T getData() {
+    return data;
+  }
 
-    public String getError() {
-        return error;
-    }
+  public void setData(T data) {
+    this.data = data;
+  }
 
-    public void setError(String error) {
-        this.error = error;
-    }
+  public String getError() {
+    return error;
+  }
+
+  public void setError(String error) {
+    this.error = error;
+  }
 }

@@ -10,6 +10,7 @@ import java.util.List;
  * @company NextUp
  */
 public class RestaurantInfoDto {
+
   private String name;
   private String id;
   private String imageUrl;
@@ -18,6 +19,7 @@ public class RestaurantInfoDto {
   private int deliveryTime;
   private LocalTime openingHours;
   private LocalTime closingHours;
+  private double ratings;
 
   public LocalTime getOpeningHours() {
     return openingHours;
@@ -50,8 +52,6 @@ public class RestaurantInfoDto {
   public void setDeliveryTime(int deliveryTime) {
     this.deliveryTime = deliveryTime;
   }
-
-  private double ratings;
 
   public double getRatings() {
     return ratings;

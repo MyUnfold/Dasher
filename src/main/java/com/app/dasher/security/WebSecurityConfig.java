@@ -23,45 +23,47 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+  @Autowired
+  private JwtTokenProvider jwtTokenProvider;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.cors().and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
-                .antMatchers("/v1/user/register/**").permitAll()
-                .anyRequest().authenticated();
-        http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
-    }
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.csrf().disable();
+    http.cors().and()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        .authorizeRequests()
+        .antMatchers("/v1/user/register/**").permitAll()
+        .anyRequest().authenticated();
+    http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+  }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-    }
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+  }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
-    }
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder(12);
+  }
 
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+  @Override
+  @Bean
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("X-Dash-User-Token", "content-type", "Authorization"));
-        configuration.setExposedHeaders(List.of("X-Dash-User-Token"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(List.of("*"));
+    configuration.setAllowedMethods(
+        Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+    configuration.setAllowedHeaders(
+        Arrays.asList("X-Dash-User-Token", "content-type", "Authorization"));
+    configuration.setExposedHeaders(List.of("X-Dash-User-Token"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+  }
 
 }

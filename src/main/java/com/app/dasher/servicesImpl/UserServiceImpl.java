@@ -1,10 +1,10 @@
 package com.app.dasher.servicesImpl;
 
+import com.app.dasher.models.common.PersonalInfo;
 import com.app.dasher.models.user.OtpRequestDto;
 import com.app.dasher.models.user.UserInfoResponseDto;
 import com.app.dasher.models.user.UserPreferencesDto;
 import com.app.dasher.models.user.UsersInfo;
-import com.app.dasher.models.common.PersonalInfo;
 import com.app.dasher.security.JwtTokenProvider;
 import com.app.dasher.services.UserInfoService;
 import com.app.dasher.utils.Constant;
@@ -119,7 +119,8 @@ public class UserServiceImpl implements UserInfoService {
     userInfoResponseDto.setOnBoardingDone(usersInfo.isOnBoardingDone());
 
     usersInfo.setPassword(passwordEncoder.encode(personalInfo.getFirebaseAuthTokenId()));
-    String tokenHeader = jwtTokenProvider.createToken(personalInfo.getEmail(), personalInfo.getRoles(), false, false);
+    String tokenHeader = jwtTokenProvider.createToken(personalInfo.getEmail(),
+        personalInfo.getRoles(), false, false);
     mongoOperations.save(usersInfo);
 
     return ResponseEntity.ok().header(Constant.TOKEN_HEADER, tokenHeader).body(userInfoResponseDto);

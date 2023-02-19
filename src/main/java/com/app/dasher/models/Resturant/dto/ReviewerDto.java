@@ -7,6 +7,7 @@ package com.app.dasher.models.Resturant.dto;
  * @company NextUp
  */
 public class ReviewerDto {
+
   private double ratings;
   private int numberOfReviewers;
 

@@ -7,6 +7,7 @@ package com.app.dasher.models.user;
  * @company NextUp
  */
 public class OtpRequestDto {
+
   private String sourceInfo;
   private String fullName;
 

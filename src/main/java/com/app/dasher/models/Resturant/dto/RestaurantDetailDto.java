@@ -10,6 +10,7 @@ import java.util.List;
  * @company NextUp
  */
 public class RestaurantDetailDto {
+
   private String name;
   private String logoUrl;
   private String id;

@@ -2,14 +2,12 @@ package com.app.dasher.models.Resturant;
 
 import com.app.dasher.models.Resturant.menu.MenuItems;
 import com.app.dasher.models.common.BaseModel;
-import com.app.dasher.models.common.GeoLocation;
 import com.app.dasher.models.common.Loc;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.gson.Gson;
+import java.time.LocalTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalTime;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

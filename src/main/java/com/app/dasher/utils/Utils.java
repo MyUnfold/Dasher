@@ -11,6 +11,7 @@ import java.util.Random;
  * @company NextUp
  */
 public class Utils {
+
   private static final Random randomGenerator = new Random();
   private static final String JWT_ALGO_TYPE = "DES";
   private static final String APP_NAME = "Dash";
