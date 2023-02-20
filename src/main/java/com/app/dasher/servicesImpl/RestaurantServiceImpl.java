@@ -14,8 +14,6 @@ import com.app.dasher.models.dashboard.RestaurantDetailFilterDto;
 import com.app.dasher.services.RestaurantService;
 import com.app.dasher.utils.Constant;
 import com.app.dasher.utils.Utils;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -23,10 +21,6 @@ import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.geo.Circle;
-import org.springframework.data.geo.Distance;
-import org.springframework.data.geo.Metrics;
-import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -57,9 +51,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-    restaurantDetails.setOpeningTime(LocalTime.parse(restaurantDto.getOpeningHours(), formatter));
-    restaurantDetails.setClosingTime(LocalTime.parse(restaurantDto.getClosingHours(), formatter));
+
+    restaurantDetails.setOpeningTime(restaurantDto.getOpeningTime());
+    restaurantDetails.setClosingTime(restaurantDto.getClosingTime());
     restaurantDetails.setId(Utils.generateId());
     restaurantDetails.setUpdatedAt(Utils.getCurrentTime());
     restaurantDetails.setCreatedAt(Utils.getCurrentTime());
@@ -76,6 +70,12 @@ public class RestaurantServiceImpl implements RestaurantService {
   @Override
   public Object listRestaurantBasedUponConfig(ListRestaurantConfigDto listRestaurantConfigDto) {
     Query query = new Query();
+
+    if (listRestaurantConfigDto.getCurrentTimeInHours() > 0) {
+      query.addCriteria(new Criteria().andOperator(
+          Criteria.where("openingTime").lte(listRestaurantConfigDto.getCurrentTimeInHours()),
+          Criteria.where("closingTime").gte(listRestaurantConfigDto.getCurrentTimeInHours())));
+    }
 
     if (null != listRestaurantConfigDto.getName()) {
       query.addCriteria(Criteria.where("name").regex(
@@ -102,13 +102,6 @@ public class RestaurantServiceImpl implements RestaurantService {
     if (null != listRestaurantConfigDto.getCuisine()) {
       query.addCriteria(Criteria.where("cuisine").is(listRestaurantConfigDto.getCuisine()));
     }
-
-//    if (listRestaurantConfigDto.getCurrentTimeInHours() > 0) {
-//      LocalTime currentTime = LocalTime.of(listRestaurantConfigDto.getCurrentTimeInHours(), 0);
-//      query.addCriteria(new Criteria().andOperator(
-//          Criteria.where("openingTime").lt(currentTime),
-//          Criteria.where("closingTime").gt(currentTime)));
-//    }
 
     if (listRestaurantConfigDto.getLng() != null && listRestaurantConfigDto.getLng() != null
         && listRestaurantConfigDto.getDistanceInKm() > 0.0) {

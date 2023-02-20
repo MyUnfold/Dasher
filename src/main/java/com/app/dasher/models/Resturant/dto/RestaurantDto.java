@@ -10,22 +10,22 @@ import com.app.dasher.models.Resturant.Restaurant;
  */
 public class RestaurantDto extends Restaurant {
 
-  private String openingHours;
-  private String closingHours;
+  private int openingHours;
+  private int closingHours;
 
-  public String getOpeningHours() {
+  public int getOpeningHours() {
     return openingHours;
   }
 
-  public void setOpeningHours(String openingHours) {
+  public void setOpeningHours(int openingHours) {
     this.openingHours = openingHours;
   }
 
-  public String getClosingHours() {
+  public int getClosingHours() {
     return closingHours;
   }
 
-  public void setClosingHours(String closingHours) {
+  public void setClosingHours(int closingHours) {
     this.closingHours = closingHours;
   }
 }

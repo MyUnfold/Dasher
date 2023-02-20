@@ -60,15 +60,15 @@ public class HomeServiceImpl implements HomeService {
         restaurantInfoDto.setCuisine(restaurant.getCuisine());
         restaurantInfoDto.setImageUrl(restaurant.getLogoUrl());
         restaurantInfoDto.setId(restaurant.getId());
-        restaurantInfoDto.setOpeningHours(restaurant.getOpeningTime());
-        restaurantInfoDto.setClosingHours(restaurant.getClosingTime());
+//        restaurantInfoDto.setOpeningHours(restaurant.getOpeningTime());
+//        restaurantInfoDto.setClosingHours(restaurant.getClosingTime());
         restaurantInfoDto.setOpen(true);
-        if(restaurant.getServiceType().equals(ServiceType.DINNING)) {
-          if(restaurant.getDiningReview() != null) {
+        if (restaurant.getServiceType().equals(ServiceType.DINNING)) {
+          if (restaurant.getDiningReview() != null) {
             restaurantInfoDto.setRatings(restaurant.getDiningReview().getRating());
           }
         } else {
-          if(restaurant.getServiceReview() != null) {
+          if (restaurant.getServiceReview() != null) {
             restaurantInfoDto.setRatings(restaurant.getServiceReview().getRating());
           }
         }

@@ -4,7 +4,6 @@ import com.app.dasher.models.Resturant.menu.MenuItems;
 import com.app.dasher.models.common.BaseModel;
 import com.app.dasher.models.common.Loc;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,8 +37,8 @@ public class Restaurant extends BaseModel {
   private Ratings serviceReview;
   private ServiceType serviceType;
   private String customAddress;
-  private LocalTime openingTime;
-  private LocalTime closingTime;
+  private int openingTime;
+  private int closingTime;
   private ContactInfo contactInfo;
   private List<MenuItems> menuItemsList;
   private List<String> cuisine;
@@ -148,19 +147,19 @@ public class Restaurant extends BaseModel {
     this.customAddress = customAddress;
   }
 
-  public LocalTime getOpeningTime() {
+  public int getOpeningTime() {
     return openingTime;
   }
 
-  public void setOpeningTime(LocalTime openingTime) {
+  public void setOpeningTime(int openingTime) {
     this.openingTime = openingTime;
   }
 
-  public LocalTime getClosingTime() {
+  public int getClosingTime() {
     return closingTime;
   }
 
-  public void setClosingTime(LocalTime closingTime) {
+  public void setClosingTime(int closingTime) {
     this.closingTime = closingTime;
   }
 

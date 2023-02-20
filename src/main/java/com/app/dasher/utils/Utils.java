@@ -18,7 +18,7 @@ public class Utils {
   private static final String APP_SUBJECT = "Debugged";
   private static Key key;
   private static String jwt;
-  private static String TEMP_URL = "";
+  private static final String TEMP_URL = "";
 
   public static int randomInteger(int min, int max) {
     return randomGenerator.nextInt(max - min) + min;
